@@ -4,6 +4,26 @@ import 'datatables.net-dt'
 import 'datatables.net-select-dt'
 
 class DatatableInitializer {
+    get sLengthMenuTitle() {
+        return this._sLengthMenuTitle;
+    }
+
+    get sZeroRecordsTitle() {
+        return this._sZeroRecordsTitle;
+    }
+
+    set sZeroRecordsTitle(value) {
+        this._sZeroRecordsTitle = value;
+    }
+
+    get processingTitle() {
+        return this._processingTitle;
+    }
+
+    set processingTitle(value) {
+        this._processingTitle = value;
+    }
+
     get columnsWithSearchingCheckboxesValues() {
         return this._columnsWithSearchingCheckboxesValues;
     }
@@ -120,9 +140,15 @@ class DatatableInitializer {
         this._columnsWithSearchingSelectorValues = [];
         this._columnsWithSearchingCheckboxesValues = [];
         this._isWithCheckboxes = false;
-        this._searchTitle = 'Szukaj';
+        this.initLanguageTitles();
     }
 
+    initLanguageTitles() {
+        this._searchTitle = 'Szukaj';
+        this._processingTitle = 'Przetwarzanie';
+        this._sZeroRecordsTitle = 'Nie znaleziono pasujących rekordów';
+        this._sLengthMenuTitle = 'Wyświetl _MENU_ rekordów';
+    }
 
     initDatatable() {
         var self = this;
@@ -134,13 +160,15 @@ class DatatableInitializer {
             "bInfo": false,
             'language': {
                 search: this.searchTitle,
+                processing: self.processingTitle
             },
             "oLanguage": {
                 "oPaginate": {
                     "sNext": ">",
                     "sPrevious": "<"
                 },
-                "sLengthMenu": "Wyświetl _MENU_ rekordów",
+                "sLengthMenu": self.sLengthMenuTitle,
+                "sZeroRecords": self.sZeroRecordsTitle
             },
 
             ajax: {
