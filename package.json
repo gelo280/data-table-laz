@@ -1,6 +1,6 @@
 {
   "name": "data-table-laz",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "repository": "https://github.com/gelo280/data-table-laz.git",
   "author": "Grzegorz Lazeba <grzegorz.lazeba@ultrano.pl>",
