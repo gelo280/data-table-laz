@@ -3,6 +3,7 @@
 import 'datatables.net-dt'
 import 'datatables.net-select-dt'
 
+
 class DatatableInitializer {
     get sLengthMenuTitle() {
         return this._sLengthMenuTitle;
@@ -109,14 +110,12 @@ class DatatableInitializer {
     }
 
     get columns() {
-        if (this.isWithCheckboxes) {
-            return [
-                {
-                    data: null
-                }
-            ].concat(this._columns);
+        if (!this.isWithCheckboxes) {
+            return this.buildColumns(_columns);
         }
-        return this._columns;
+        return [
+            this.buildColumns([null])
+        ].concat(this.buildColumns(this._columns));
     }
 
     set columns(value) {
@@ -149,6 +148,16 @@ class DatatableInitializer {
         this._sZeroRecordsTitle = 'Nie znaleziono pasujących rekordów';
         this._sLengthMenuTitle = 'Wyświetl _MENU_ rekordów';
     }
+
+    buildColumns(_columnNames) {
+        let columns = [];
+        _columnNames.forEach(function (d) {
+            columns.push({
+                data: d
+            })
+        });
+        return columns;
+    };
 
     initDatatable() {
         var self = this;
@@ -280,7 +289,6 @@ class DatatableInitializer {
                         selectedValues.push(value ? '^' + value + '$' : '');
                     })
                     let joinedValues = selectedValues.join('|');
-                    console.log(joinedValues);
                     column
                         .search(joinedValues, true, false)
                         .draw();
@@ -310,4 +318,5 @@ class DatatableInitializer {
         });
     }
 }
+
 export default DatatableInitializer
