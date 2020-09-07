@@ -111,7 +111,7 @@ class DatatableInitializer {
 
     get columns() {
         if (!this.isWithCheckboxes) {
-            return this.buildColumns(_columns);
+            return this.buildColumns(this._columns);
         }
         return [
             this.buildColumns([null])
