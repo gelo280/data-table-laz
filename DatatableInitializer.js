@@ -159,8 +159,19 @@ class DatatableInitializer {
         return columns;
     };
 
+    buildSelectOption(){
+        if(this.isWithCheckboxes) {
+            return {style: 'multi', selector: 'td:first-child'};
+        }
+        return false;
+
+    }
+
+
     initDatatable() {
         var self = this;
+        let select = self.buildSelectOption();
+
         this.dataTable = this._table.DataTable({
             processing: true,
             orderCellsTop: true,
