@@ -205,10 +205,7 @@ class DatatableInitializer {
             },
             "columns": this.columns,
             columnDefs: this.columnDefs,
-            select: {
-                style: 'os',
-                selector: 'td:first-child'
-            },
+            select: select,
 
             order: [[1, 'asc']],
             initComplete: function () {
