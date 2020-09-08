@@ -260,6 +260,9 @@ class DatatableInitializer {
 
             if (typeof self.columnsWithSearchingSelectorValues[key] === 'undefined') {
                 column.data().unique().sort().each(function (d) {
+                    if(d === null){
+                        return;
+                    }
                     select.append(`<option value="${d}">${d}</option>`)
                 });
             } else {
@@ -298,6 +301,9 @@ class DatatableInitializer {
 
             if (typeof self.columnsWithSearchingCheckboxesValues[key] === 'undefined') {
                 column.data().unique().sort().each(function (d) {
+                    if(d === null){
+                        return;
+                    }
                     searchingCheckboxesDiv.append(
                         `<div>
                         <input type="checkbox" class="data-table-laz-searching-checkbox" name="${d}" value="${d}">
